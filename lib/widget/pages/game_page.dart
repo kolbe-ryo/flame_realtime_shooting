@@ -36,8 +36,9 @@ class _GamePageState extends State<GamePage> {
 
   Future<void> _initialize() async {
     _gameEngine = GameEngine(
-        // TODO: メンバ変数の設定
-        );
+      onGameOver: (bool) {},
+      onGameStateUpdate: (Vector2, int) {},
+    );
 
     // Widgetがマウントするのを待つために１フレームawaitする
     await Future.delayed(Duration.zero);
@@ -49,7 +50,9 @@ class _GamePageState extends State<GamePage> {
       context: context,
       barrierDismissible: false,
       builder: (context) {
-        LobbyDialog(onGameStarted: onGameStarted);
+        return LobbyDialog(
+          onGameStarted: (String) {},
+        );
       },
     );
   }

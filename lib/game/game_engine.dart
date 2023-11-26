@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flame/game.dart';
 import 'package:flame/input.dart';
 import 'package:flame/image_composition.dart' as flame_image;
+import 'package:flame_realtime_shooting/game/components/player.dart';
 import 'package:flutter/material.dart';
 
 class GameEngine extends FlameGame with PanDetector, HasCollisionDetection {
@@ -39,8 +40,9 @@ class GameEngine extends FlameGame with PanDetector, HasCollisionDetection {
   }
 
   @override
-  FutureOr<void> onLoad() {
-    // TODO: implement onLoad
+  FutureOr<void> onLoad() async {
+    final playerImage = await images.load('player.png');
+
     return super.onLoad();
   }
 
