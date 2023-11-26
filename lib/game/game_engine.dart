@@ -42,7 +42,10 @@ class GameEngine extends FlameGame with PanDetector, HasCollisionDetection {
   @override
   FutureOr<void> onLoad() async {
     final playerImage = await images.load('player.png');
-
+    _player = Player.me();
+    final spriteSize = Vector2.all(_player.radius * 2);
+    // TODO add components
+    _player.add(component);
     return super.onLoad();
   }
 
