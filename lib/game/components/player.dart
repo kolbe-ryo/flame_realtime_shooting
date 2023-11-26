@@ -14,6 +14,8 @@ class Player extends PositionComponent with HasGameRef, CollisionCallbacks {
 
   static const _radius = 30.0;
 
+  double get radius => _radius;
+
   late final Vector2 initialPosition;
 
   Vector2 velocity = Vector2.zero();
