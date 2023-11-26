@@ -1,5 +1,6 @@
 import 'package:flame/game.dart';
 import 'package:flame_realtime_shooting/game/game_engine.dart';
+import 'package:flame_realtime_shooting/widget/components/lobby_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
@@ -48,7 +49,7 @@ class _GamePageState extends State<GamePage> {
       context: context,
       barrierDismissible: false,
       builder: (context) {
-        // TODO Dialog
+        LobbyDialog(onGameStarted: onGameStarted);
       },
     );
   }
