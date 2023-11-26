@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:flame/components.dart';
 import 'package:flame/game.dart';
 import 'package:flame/input.dart';
 import 'package:flame/image_composition.dart' as flame_image;
@@ -41,11 +42,31 @@ class GameEngine extends FlameGame with PanDetector, HasCollisionDetection {
 
   @override
   FutureOr<void> onLoad() async {
+    // 自分のPlayer設定
     final playerImage = await images.load('player.png');
     _player = Player.me();
-    final spriteSize = Vector2.all(_player.radius * 2);
-    // TODO add components
-    _player.add(component);
+    _player.add(
+      SpriteComponent(
+        sprite: Sprite(playerImage),
+        size: Vector2.all(_player.radius * 2),
+      ),
+    );
+    add(_player);
+
+    // 相手のPlayer設定
+    final opponentImage = await images.load('opponent.png');
+    _opponent = Player.opponent();
+    _opponent.add(
+      SpriteComponent(
+        sprite: Sprite(opponentImage),
+        size: Vector2.all(_opponent.radius * 2),
+      ),
+    );
+    add(_opponent);
+
+    _playerBulletImage = await images.load('player-bullet.png');
+    _opponentBulletImage = await images.load('opponent-bullet.png');
+
     return super.onLoad();
   }
 
