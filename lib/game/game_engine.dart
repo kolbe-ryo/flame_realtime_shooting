@@ -110,7 +110,6 @@ class GameEngine extends FlameGame with PanDetector, HasCollisionDetection {
         child.removeFromParent();
       }
     }
-
     _shootBullets();
   }
 
