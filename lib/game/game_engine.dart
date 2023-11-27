@@ -70,9 +70,12 @@ class GameEngine extends FlameGame with PanDetector, HasCollisionDetection {
     return super.onLoad();
   }
 
+  // マウスやカーソルの
   @override
   void onPanUpdate(DragUpdateInfo info) {
-    // TODO: implement onPanUpdate
+    _player.move(info.delta.global);
+    final mirroredPosition = _player.getMirroredPercentPosition();
+    _onGameStateUpdate(mirroredPosition, _playerLifePoint);
     super.onPanUpdate(info);
   }
 
