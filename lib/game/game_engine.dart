@@ -4,6 +4,7 @@ import 'package:flame/components.dart';
 import 'package:flame/game.dart';
 import 'package:flame/input.dart';
 import 'package:flame/image_composition.dart' as flame_image;
+import 'package:flame_realtime_shooting/game/components/bullet.dart';
 import 'package:flame_realtime_shooting/game/components/player.dart';
 import 'package:flutter/material.dart';
 
@@ -96,6 +97,21 @@ class GameEngine extends FlameGame with PanDetector, HasCollisionDetection {
     if (_playerLifePoint <= 0) {
       endGame(false);
     }
+  }
+
+  void startNewGame() {
+    isGameOver = false;
+    _playerLifePoint = _initialLifePoints;
+
+    for (final child in children) {
+      if (child is Player) {
+        child.position = child.initialPosition;
+      } else if (child is Bullet) {
+        child.removeFromParent();
+      }
+    }
+
+    _shootBullets();
   }
 
   /// いずれかのプレーヤーのHPが０になったら呼ばれる関数
