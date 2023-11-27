@@ -81,7 +81,26 @@ class GameEngine extends FlameGame with PanDetector, HasCollisionDetection {
 
   @override
   void update(double dt) {
-    // TODO: implement update
     super.update(dt);
+    if (isGameOver) {
+      return;
+    }
+    for (final child in children) {
+      if (child is Bullet && child.hasBeenHit && !child.isMine) {
+        _playerLifePoint = _playerLifePoint - child.damage;
+        final mirroredPosition = _player.getMirroredPercentPosition();
+        onGameStateUpdate(mirroredPosition, _playerLifePoint);
+        _player.updateLife(_playerLifePoint / _initialLifePoints);
+      }
+    }
+    if (_playerLifePoint <= 0) {
+      endGame(false);
+    }
+  }
+
+  /// いずれかのプレーヤーのHPが０になったら呼ばれる関数
+  void endGame(bool playerWon) {
+    isGameOver = true;
+    _onGameOver(playerWon);
   }
 }
