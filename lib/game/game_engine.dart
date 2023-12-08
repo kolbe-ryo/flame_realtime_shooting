@@ -71,7 +71,6 @@ class GameEngine extends FlameGame with PanDetector, HasCollisionDetection {
     return super.onLoad();
   }
 
-  // マウスやカーソルの
   @override
   void onPanUpdate(DragUpdateInfo info) {
     _player.move(info.delta.global);
